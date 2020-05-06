@@ -1,5 +1,7 @@
 # farmify
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1eea667814e745d388efe8d7225da323)](https://app.codacy.com/gh/BuildForSDG/farmify-frontend?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/farmify-frontend&utm_campaign=Badge_Grade_Dashboard)
+
 A project to double productivity of rural farmers
 
 ## Installing and running locally
