@@ -29,4 +29,5 @@ Run `firebase login` and login with the project credentials
 
 Then run `firebase deploy`
 
-You can visit the app after deployment at https://farmify-develop.web.app
+## Usage
+You can use the live deployment at https://farmify-develop.web.app
