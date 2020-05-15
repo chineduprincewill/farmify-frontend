@@ -1,21 +1,9 @@
 import React from 'react';
 import checkPropTypes from 'check-prop-types';
 import { shallow } from 'enzyme';
-import { applyMiddleware, createStore } from 'redux';
-import { middleware } from '../../store';
-import rootReducer from '../../reducers';
+import { testStore, checkProps } from '../../../Utility';
 
 import Register from '../../components/Register';
-
-const checkProps = (component, expectedProps) => {
-    const propsErr = checkPropTypes(component.propTypes, expectedProps, 'props', component.name);
-    return propsErr;
-};
-
-const testStore = (initialState) => {
-    const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
-    return createStoreWithMiddleware(rootReducer, initialState);
-};
 
 const setUp = (initialState={}) => {
     const store = testStore(initialState);

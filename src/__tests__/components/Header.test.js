@@ -3,7 +3,15 @@ import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import configureStore from 'redux-mock-store';
 
+import { testStore } from '../../../Utility';
+
 import Header from '../../components/common/Header';
+
+const setUp = (initialState={}) => {
+    const store = testStore(initialState);
+    const wrapper = shallow(<Header store={store} />).childAt(0).dive();
+    return wrapper;
+};
 
 describe('<Header />', () => {
 
@@ -11,7 +19,18 @@ describe('<Header />', () => {
     let component;
 
     beforeEach(() => {
-        component = shallow(<Header />);
+        const initState = {
+            auth:{
+                isAuthenticated: false,
+                isRegistered: false,
+                user: null,
+                successMsg : {},
+                errors: [],
+                error: {}
+            }  
+        };
+
+        component =  setUp(initState);
     });
 
     /**it('renders the component', () => {

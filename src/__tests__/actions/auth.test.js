@@ -3,8 +3,7 @@ import { testStore } from '../../../Utility';
 import configureStore from 'redux-mock-store';
 
 // Actions to be tested
-import { register } from '../../actions/auth';
-import { REGISTER_SUCCESS } from '../../actions/types';
+import { register, login } from '../../actions/auth';
 
 const mockStore = configureStore();
 const store = mockStore();
@@ -57,28 +56,49 @@ describe('Register action', () => {
 });
 
 
-/** 
-describe('Register action', () => {
+describe('Login action', () => {
 
-    beforeEach(() => { // Runs before each test in the suite
-        store.clearActions();
-      });
-    
+    beforeEach(() => {
+        moxios.install();
+    });
 
-      describe('register', () => {
-        test('Dispatches the correct action and payload', () => {
-          const expectedActions = [
-            {
-              'payload': { success:'Registration successful'},
-              'type': 'REGISTER_SUCCESS',
-            },
-          ];
-      
-          return store.dispatch(register());
-          expect(store.getActions()).toEqual(expectedActions);
+    afterEach(() => {
+        moxios.uninstall();
+    });
+
+    it('Store should update correctly', () => {
+
+        const initialState = {
+            user: null
+        }
+
+        const expectedState = {
+            user: {
+                firstname:'first name',
+                lastname:'lastname',
+                email:'email',
+                phone:'mobile no'
+            }
+        };
+
+        const store = testStore();
+
+        moxios.wait(() => {
+            const request = moxios.requests.mostRecent();
+            request.respondWith({
+                status: 201,
+                response: expectedState
+            })
         });
-      });
 
+        return store.dispatch(login())
+        .then(() => {
+            const newState = store.getState();
+            expect(newState.auth.user).toBe(expectedState);
+        })
+        
+    });
 
 });
-*/
+
+

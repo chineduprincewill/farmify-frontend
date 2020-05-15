@@ -4,9 +4,12 @@ import auth from '../../reducers/auth';
 describe('auth reducer', () => {
 
     const state = {
+        isAuthenticated: false,
+        isRegistered: false,
         user: null,
-        successMsg : '',
-        errors: []
+        successMsg : {},
+        errors: [],
+        error: {}
     }
 
     it('should return default state', () => {
@@ -17,11 +20,14 @@ describe('auth reducer', () => {
     it('should return new state if receiving type', () => {
 
         const regResponse = { 
+            isAuthenticated: false,
+            isRegistered: true,
             user: null,
             successMsg: { 
                             success : 'Registration successfull'
                         },
-            errors: []
+            errors: [],
+            error: {}
         };
 
         const success = {success : 'Registration successfull'};

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { register } from '../actions/auth';
@@ -25,13 +26,14 @@ class Register extends Component {
         showAddrs : false,
         showAuth : false,
         showConfirm : false,
-        showFinishBtn : false
+        showFinishBtn : false,
     }
 
 
     static propTypes = {
         errors: PropTypes.array,
         successMsg: PropTypes.object,
+        isRegistered : PropTypes.bool,
         register: PropTypes.func.isRequired
     }
 
@@ -156,6 +158,10 @@ class Register extends Component {
 
 
   render() {
+
+    if(this.props.isRegistered){
+        return <Redirect to="/login" />
+    }
 
     const { successMsg, errors } = this.props;  
 
@@ -386,7 +392,8 @@ class Register extends Component {
 
 const mapStateToProps = state => ({
     errors : state.auth.errors,
-    successMsg : state.auth.successMsg
+    successMsg : state.auth.successMsg,
+    isRegistered : state.auth.isRegistered
 });
 
 export default connect(mapStateToProps, { register })(Register);
